@@ -1,0 +1,102 @@
+/* styles.css */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+.container {
+    padding: 16px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+header h1 {
+    font-size: 24px;
+    color: #2e7d32;
+    text-align: left;
+}
+
+header p{
+    text-align: left;
+}
+
+header h1 span {
+    font-weight: bold;
+}
+
+header p {
+    color: #666;
+}
+
+.clinics h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.clinic-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    color: #fff;
+    height: 80px;
+}
+
+.clinic-card img {
+    width: 40px;
+    height: 40px;
+}
+
+.navegacao {
+    display: flex;
+    align-items: center;
+}
+
+.navegacao img{
+    width: 25px;
+    height: 25px;
+}
+
+.clinic-card h3 {
+    flex-grow: 1;
+    margin: 0 16px;
+}
+
+.clinic-card button {
+    background-color: #d7ccc8;
+    color: #5d4037;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 16px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #eee;
+    padding: 8px 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+footer nav {
+    display: flex;
+    justify-content: space-around;
+}
+
+footer nav a {
+    text-decoration: none;
+    color: #666;
+    font-size: 14px;
+    text-align: center;
+}
