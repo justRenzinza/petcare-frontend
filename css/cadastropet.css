@@ -1,9 +1,9 @@
 body{
      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
      background-color: #ffffff;
- }
- 
- #container{
+}
+
+#container{
      width: 90%;
      height: 570px;
      background-color: rgba(36, 99, 21, 0.658);
@@ -12,16 +12,16 @@ body{
      -webkit-border-radius: 10px;
      border-radius: 40px;
      text-align: center;
- }
- 
- #container img{
+}
+
+#container img{
      width: 150px;
      height: 150px;
      margin-top: 40px;
      margin-bottom: 10px;
- }
- 
- input{
+}
+
+input{
      height: 40px;
      width: 80%;
      font-size: 18px;
@@ -35,11 +35,11 @@ body{
 input[type="date"]{
      font-family: 'Trebuchet MS';
 }
- 
+
 input{
      color: #024b08;
 }
- 
+
 input.confirmar{
      background-color: #e9e1cb;
      color: #1C480F;
@@ -48,12 +48,12 @@ input.confirmar{
      padding: 1px;
      border-radius: 20px;
      margin-top: 10px; 
- }
+}
 
 h2{
      color:#ffffff;
      font-size:large;
- }
+}
 
 label{
      margin-left: -120px;
@@ -64,7 +64,7 @@ label{
      font-weight: bold;
 }
 
- ::placeholder {
+::placeholder {
      color: #024b08;
      opacity: 0.9;
-   }
+}
