@@ -68,3 +68,35 @@ label{
      color: #024b08;
      opacity: 0.9;
 }
+
+.navegacao {
+     display: flex;
+     align-items: center;
+}
+
+.navegacao img{
+     width: 25px;
+     height: 25px;
+}
+
+footer {
+     position: fixed;
+     bottom: 0;
+     left: 0;
+     width: 100%;
+     background-color: #eee;
+     padding: 8px 0;
+     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+ 
+footer nav {
+     display: flex;
+     justify-content: space-around;
+}
+ 
+footer nav a {
+     text-decoration: none;
+     color: #666;
+     font-size: 14px;
+     text-align: center;
+}
