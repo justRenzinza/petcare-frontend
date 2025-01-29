@@ -34,16 +34,16 @@ form {
 }
 
 input {
-    background-color: #2f4f2f;
+    background-color: #d7ccc8;
     border: none;
     padding: 10px;
     margin-bottom: 12px;
     border-radius: 20px;
-    color: white;
+    color: #4e7039;
 }
 
 input::placeholder {
-    color: white;
+    color: #4e7039;
 }
 
 button {
