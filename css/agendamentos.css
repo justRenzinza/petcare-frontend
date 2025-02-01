@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f3f4f6;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background: white;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+h1 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.lista-agendamentos {
+    padding: 15px;
+}
+
+.card-agendamento {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.info-pet {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.foto-pet {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.nome-pet {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.tipo-pet {
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.detalhes-pet {
+    font-size: 14px;
+    color: #666;
+}
+
+.info-consulta {
+    margin-top: 12px;
+    font-size: 14px;
+}
+
+.info-consulta p {
+    margin-bottom: 4px;
+}
+
+.info-consulta span {
+    font-weight: bold;
+}
+
+.status {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    margin-top: 12px;
+}
+
+.agendado {
+    background: #e9d5ff;
+    color: #7e22ce;
+}
+
+.realizado {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+footer {
+    background: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px;
+}
+
+.navegacao a {
+    text-decoration: none;
+}
+
+.navegacao img {
+    width: 24px;
+    height: 24px;
+}
