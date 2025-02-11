@@ -23,31 +23,12 @@
             
             <div class="calendar">
                 <div class="calendar-header">
-                    <button class="nav-btn">&lt;</button>
+                    <button class="nav-btn prev-month">&lt;</button>
                     <div class="current-month">
-                        <select class="month-select">
-                            <option value="0">Janeiro</option>
-                            <option value="1">Fevereiro</option>
-                            <option value="2">Março</option>
-                            <option value="3">Abril</option>
-                            <option value="4">Maio</option>
-                            <option value="5">Junho</option>
-                            <option value="6">Julho</option>
-                            <option value="7">Agosto</option>
-                            <option value="8">Setembro</option>
-                            <option value="9">Outubro</option>
-                            <option value="10">Novembro</option>
-                            <option value="11" selected>Dezembro</option>
-                        </select>
-                        <select class="year-select">
-                            <option>2024</option>
-                            <option>2025</option>
-                            <option>2026</option>
-                            <option>2027</option>
-                            <option>2028</option>
-                        </select>
+                        <h2>Dezembro</h2>
+                        <span>2024</span>
                     </div>
-                    <button class="nav-btn">&gt;</button>
+                    <button class="nav-btn next-month">&gt;</button>
                 </div>
 
                 <div class="weekdays">
@@ -63,50 +44,6 @@
                 <div class="calendar-grid" id="calendar-days">
                 </div>
             </div>
-
-            <script>
-                function generateCalendar(year, month) {
-                    const firstDay = new Date(year, month, 1);
-                    const lastDay = new Date(year, month + 1, 0);
-                    const startDay = firstDay.getDay();
-                    const totalDays = lastDay.getDate();
-                    
-                    const calendarGrid = document.getElementById('calendar-days');
-                    calendarGrid.innerHTML = '';
-                    
-                    for (let i = 0; i < startDay; i++) {
-                        const emptyCell = document.createElement('button');
-                        emptyCell.className = 'date-btn disabled';
-                        calendarGrid.appendChild(emptyCell);
-                    }
-                    
-                    for (let day = 1; day <= totalDays; day++) {
-                        const dateCell = document.createElement('button');
-                        dateCell.className = 'date-btn';
-                        dateCell.textContent = day;
-                        
-                        dateCell.addEventListener('click', function() {
-                            document.querySelectorAll('.date-btn').forEach(btn => 
-                                btn.classList.remove('selected'));
-                            this.classList.add('selected');
-                        });
-                        
-                        calendarGrid.appendChild(dateCell);
-                    }
-                }
-
-                document.querySelector('.month-select').addEventListener('change', function() {
-                    const year = document.querySelector('.year-select').value;
-                    generateCalendar(parseInt(year), parseInt(this.value));
-                });
-
-                document.querySelector('.year-select').addEventListener('change', function() {
-                    const month = document.querySelector('.month-select').value;
-                    generateCalendar(parseInt(this.value), parseInt(month));
-                });
-
-                generateCalendar(2024, 11); 
-            </script>
         </section>
 
         <section class="time-slots">
@@ -129,16 +66,111 @@
         <footer>
             <nav>
                 <div class="navegacao">
-                    <a href="#"><img src="src/home.png" alt=""></a>
+                    <img src="src/home.png" alt="Home">
                 </div>
                 <div class="navegacao">
-                    <a href="#"><img src="src/dog.png" alt=""></a>
+                    <img src="src/dog.png" alt="Pet">
                 </div>
                 <div class="navegacao">
-                    <a href="#"><img src="src/calendar.png" alt=""></a>
+                    <img src="src/calendar.png" alt="Agenda">
                 </div>
             </nav>
         </footer>
     </div>
+
+    <script>
+        let selectedDate = null;
+        let selectedTime = null;
+        const months = [
+            'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+            'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+        ];
+        let currentMonth = 11; 
+        let currentYear = 2024;
+
+        function updateMonthDisplay() {
+            const monthTitle = document.querySelector('.current-month h2');
+            const yearSpan = document.querySelector('.current-month span');
+            monthTitle.textContent = months[currentMonth];
+            yearSpan.textContent = currentYear;
+        }
+
+        function generateCalendar(year, month) {
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            const startDay = firstDay.getDay();
+            const totalDays = lastDay.getDate();
+            
+            const calendarGrid = document.getElementById('calendar-days');
+            calendarGrid.innerHTML = '';
+            
+            for (let i = 0; i < startDay; i++) {
+                const emptyCell = document.createElement('button');
+                emptyCell.className = 'date-btn disabled';
+                calendarGrid.appendChild(emptyCell);
+            }
+            
+            for (let day = 1; day <= totalDays; day++) {
+                const dateCell = document.createElement('button');
+                dateCell.className = 'date-btn';
+                dateCell.textContent = day;
+                
+                if (selectedDate === day) {
+                    dateCell.classList.add('available');
+                }
+                
+                dateCell.addEventListener('click', function() {
+                    document.querySelectorAll('.date-btn').forEach(btn => 
+                        btn.classList.remove('available'));
+                    this.classList.add('available');
+                    selectedDate = day;
+                });
+                
+                calendarGrid.appendChild(dateCell);
+            }
+        }
+
+        document.querySelector('.prev-month').addEventListener('click', function() {
+            if (currentMonth === 0) {
+                currentMonth = 11;
+                currentYear--;
+            } else {
+                currentMonth--;
+            }
+            updateMonthDisplay();
+            generateCalendar(currentYear, currentMonth);
+        });
+
+        document.querySelector('.next-month').addEventListener('click', function() {
+            if (currentMonth === 11) {
+                currentMonth = 0;
+                currentYear++;
+            } else {
+                currentMonth++;
+            }
+            updateMonthDisplay();
+            generateCalendar(currentYear, currentMonth);
+        });
+
+        document.querySelectorAll('.time-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.time-btn').forEach(btn => 
+                    btn.classList.remove('available'));
+                this.classList.add('available');
+                selectedTime = this.textContent;
+            });
+        });
+
+        document.querySelector('.schedule-btn').addEventListener('click', function() {
+            if (selectedDate && selectedTime) {
+                alert(`Consulta agendada para ${selectedDate}/${currentMonth + 1}/${currentYear} às ${selectedTime}`);
+            } else {
+                alert('Por favor selecione uma data e horário');
+            }
+        });
+
+        updateMonthDisplay();
+        generateCalendar(currentYear, currentMonth);
+    </script>
 </body>
 </html>
