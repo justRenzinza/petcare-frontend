@@ -11,17 +11,17 @@ body {
     margin: 0 auto;
 }
 
-.service-selector {
+.service-selector, .clinic-selector, .pet-selector {
     margin-bottom: 24px;
 }
 
-.service-selector label {
+.service-selector label, .clinic-selector label, .pet-selector label {
     display: block;
     color: #666;
     margin-bottom: 8px;
 }
 
-.service-dropdown {
+.service-dropdown, .clinic-dropdown, .pet-dropdown {
     width: 100%;
     padding: 8px;
     background-color: #4b6455;
@@ -35,7 +35,6 @@ body {
     background-position: right 8px center;
 }
 
-/* Date Selector Styles */
 .date-selector p {
     color: #666;
     margin-bottom: 16px;
@@ -112,7 +111,6 @@ body {
     cursor: default;
 }
 
-/* Time Slots Styles */
 .time-slots {
     margin-top: 24px;
 }
