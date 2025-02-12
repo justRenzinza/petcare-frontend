@@ -25,6 +25,32 @@ h1 {
     padding: 15px;
 }
 
+.botao-novo-agendamento {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: #4b6455;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: background-color 0.2s;
+}
+
+.botao-novo-agendamento:hover {
+    background-color: #6b21a8;
+}
+
+.icone-mais {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) invert(1);
+}
+
 .card-agendamento {
     background: white;
     border-radius: 8px;
