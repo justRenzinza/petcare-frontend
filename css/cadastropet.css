@@ -40,7 +40,7 @@ input{
      color: #024b08;
 }
 
-input.confirmar{
+button{
      background-color: #e9e1cb;
      color: #1C480F;
      width: 90%;
@@ -77,14 +77,14 @@ footer {
      background-color: #eee;
      padding: 8px 0;
      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-}
-
-footer nav {
+ }
+ 
+ footer nav {
      display: flex;
      justify-content: space-around;
-}
-
-.navegacao img {
+ }
+ 
+ .navegacao img {
      width: 25px;
      height: 25px;
-}
+ }
