@@ -6,76 +6,67 @@ body {
 
 .container {
     padding: 16px;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 header {
-    text-align: center;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
 }
 
 header h1 {
     font-size: 24px;
     color: #2e7d32;
-    text-align: left;
-}
-
-header p{
-    text-align: left;
-}
-
-header h1 span {
-    font-weight: bold;
+    margin: 0;
+    padding: 0;
 }
 
 header p {
     color: #666;
+    margin: 8px 0 0 0;
 }
 
 .clinics h2 {
     font-size: 18px;
-    margin-bottom: 20px;
-    margin-top: 20px;
+    color: #333;
+    margin-bottom: 16px;
 }
 
 .clinic-card {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 12px;
-    border-radius: 8px;
-    margin-bottom: 12px;
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 16px;
     color: #fff;
-    height: 80px;
+    min-height: 60px;
 }
 
 .clinic-card img {
-    width: 40px;
-    height: 40px;
-}
-
-.navegacao {
-    display: flex;
-    align-items: center;
-}
-
-.navegacao img{
-    width: 25px;
-    height: 25px;
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
 }
 
 .clinic-card h3 {
     flex-grow: 1;
-    margin: 0 16px;
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
 }
 
-.clinic-card button {
-    background-color: #d7ccc8;
+.clinic-card button,
+.clinic-card a.button {
+    background-color: rgba(255, 255, 255, 0.2);
     color: #5d4037;
     border: none;
-    padding: 8px 12px;
-    border-radius: 16px;
+    padding: 8px 16px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 14px;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: #e0e0e0;
 }
 
 footer {
@@ -83,19 +74,30 @@ footer {
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #eee;
-    padding: 8px 0;
+    background-color: #fff;
+    padding: 12px 0;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
 
 footer nav {
     display: flex;
     justify-content: space-around;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 footer nav a {
     text-decoration: none;
     color: #666;
-    font-size: 14px;
-    text-align: center;
+}
+
+.navegacao {
+    display: flex;
+    align-items: center;
+}
+
+.navegacao img {
+    width: 24px;
+    height: 24px;
+    opacity: 0.7;
 }
