@@ -6,8 +6,15 @@
     <title>Agendar Consulta</title>
     <link rel="stylesheet" href="css/agendar.css">
 </head>
-<body>
+<body onload="checkURL()">
     <div class="container">
+        <section class="pet-selector">
+            <label>Selecione o pet:</label>
+            <select class="pet-dropdown" id="petSelect">
+                <option value="">Selecione um pet</option>
+            </select>
+        </section>
+
         <section class="service-selector">
             <label>Selecione o tipo:</label>
             <select class="service-dropdown">
@@ -18,9 +25,18 @@
             </select>
         </section>
 
+        <section class="clinic-selector">
+            <label>Selecione a clínica:</label>
+            <select class="clinic-dropdown" id="clinicSelect">
+                <option value="DIAMANTE">DIAMANTE</option>
+                <option value="PETCURE">PETCURE</option>
+                <option value="CATCARE">CATCARE</option>
+                <option value="DOG E SAUDE">DOG E SAUDE</option>
+            </select>
+        </section>
+
         <section class="date-selector">
             <p>Escolha a melhor data para a sua consulta</p>
-            
             <div class="calendar">
                 <div class="calendar-header">
                     <button class="nav-btn prev-month">&lt;</button>
@@ -30,7 +46,6 @@
                     </div>
                     <button class="nav-btn next-month">&gt;</button>
                 </div>
-
                 <div class="weekdays">
                     <span>Dom</span>
                     <span>Seg</span>
@@ -40,24 +55,17 @@
                     <span>Sex</span>
                     <span>Sab</span>
                 </div>
-
-                <div class="calendar-grid" id="calendar-days">
-                </div>
+                <div class="calendar-grid" id="calendar-days"></div>
             </div>
         </section>
 
         <section class="time-slots">
             <h3>Horários disponíveis</h3>
             <div class="time-grid">
-                <button class="time-btn">8:00</button>
-                <button class="time-btn available">9:00</button>
-                <button class="time-btn">11:00</button>
-                <button class="time-btn">12:00</button>
+                <button class="time-btn">9:00</button>
                 <button class="time-btn">14:00</button>
-                <button class="time-btn">15:00</button>
-                <button class="time-btn">17:00</button>
-                <button class="time-btn">18:00</button>
-                <button class="time-btn">19:00</button>
+                <button class="time-btn">16:00</button>
+                
             </div>
         </section>
 
@@ -81,12 +89,37 @@
     <script>
         let selectedDate = null;
         let selectedTime = null;
-        const months = [
-            'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-            'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
-        ];
-        let currentMonth = 11; 
+        const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+        let currentMonth = 11;
         let currentYear = 2024;
+
+        async function loadPets() {
+            try {
+                const pets = JSON.parse(localStorage.getItem('pets')) || [];
+                const petSelect = document.getElementById('petSelect');
+                while (petSelect.options.length > 1) {
+                    petSelect.remove(1);
+                }
+                pets.forEach(pet => {
+                    const option = document.createElement('option');
+                    option.value = pet.id;
+                    option.textContent = pet.name;
+                    petSelect.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error loading pets:', error);
+            }
+        }
+
+        function checkURL() {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const clinica = urlParams.get('clinica')
+            if(clinica) {
+                document.getElementById('clinicSelect').value = clinica;
+            }
+            loadPets();
+        }
 
         function updateMonthDisplay() {
             const monthTitle = document.querySelector('.current-month h2');
@@ -100,7 +133,6 @@
             const lastDay = new Date(year, month + 1, 0);
             const startDay = firstDay.getDay();
             const totalDays = lastDay.getDate();
-            
             const calendarGrid = document.getElementById('calendar-days');
             calendarGrid.innerHTML = '';
             
@@ -120,8 +152,7 @@
                 }
                 
                 dateCell.addEventListener('click', function() {
-                    document.querySelectorAll('.date-btn').forEach(btn => 
-                        btn.classList.remove('available'));
+                    document.querySelectorAll('.date-btn').forEach(btn => btn.classList.remove('available'));
                     this.classList.add('available');
                     selectedDate = day;
                 });
@@ -154,16 +185,23 @@
 
         document.querySelectorAll('.time-btn').forEach(btn => {
             btn.addEventListener('click', function() {
-                document.querySelectorAll('.time-btn').forEach(btn => 
-                    btn.classList.remove('available'));
+                document.querySelectorAll('.time-btn').forEach(btn => btn.classList.remove('available'));
                 this.classList.add('available');
                 selectedTime = this.textContent;
             });
         });
 
         document.querySelector('.schedule-btn').addEventListener('click', function() {
+            const selectedPet = document.getElementById('petSelect').value;
+            if (!selectedPet) {
+                alert('Por favor selecione um pet');
+                return;
+            }
+            
             if (selectedDate && selectedTime) {
-                alert(`Consulta agendada para ${selectedDate}/${currentMonth + 1}/${currentYear} às ${selectedTime}`);
+                const selectedClinic = document.querySelector('.clinic-dropdown').value;
+                const selectedPetName = document.getElementById('petSelect').options[document.getElementById('petSelect').selectedIndex].text;
+                alert(`Consulta agendada para ${selectedPetName} na ${selectedClinic} para ${selectedDate}/${currentMonth + 1}/${currentYear} às ${selectedTime}`);
             } else {
                 alert('Por favor selecione uma data e horário');
             }
