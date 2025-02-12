@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
     <link rel="stylesheet" href="css/cadastropessoa.css">
+    <script src="js/cadastroPessoa.js"></script>
 </head>
 <body>
     <div class="container">
@@ -12,13 +13,13 @@
             <h2>CADASTRO</h2>
         </header>
         <section class="form-container">
-            <form>
-                <input type="text" placeholder="NOME" required>
-                <input type="text" placeholder="SOBRENOME" required>
-                <input type="text" placeholder="CEP" required>
-                <input type="date" placeholder="DATA DE NASCIMENTO" required>
-                <input type="text" placeholder="LOGIN" required>
-                <input type="password" placeholder="SENHA" required>
+            <form id="formCadastro">
+                <input type="text" id="inputNome" placeholder="NOME" required>
+                <input type="text" id="inputSobrenome" placeholder="SOBRENOME" required>
+                <input type="text" id="inputCep" placeholder="CEP" required>
+                <input type="date" id="inputDataNascimento" required>
+                <input type="text" id="inputLogin" placeholder="LOGIN" required>
+                <input type="password" id="inputSenha" placeholder="SENHA" required>
                 <button type="submit">Confirmar</button>
             </form>
         </section>
