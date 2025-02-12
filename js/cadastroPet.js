@@ -1,15 +1,21 @@
-const urlBackend = 'URL_DO_BACKEND'; 
+const urlBackend = 'URL_DO_BACKEND';
 
 document.getElementById("formCadastroPet").addEventListener("submit", async function(event) {
     event.preventDefault();
 
+    const ownerId = localStorage.getItem("userId"); // Pegando o ID do usuário logado
+    if (!ownerId) {
+        alert("Usuário não identificado!");
+        return;
+    }
+
     const pet = {
-        name: document.querySelector(".nomepet").value,
-        species: document.querySelector(".tipo").value,
-        breed: document.querySelector(".raca").value,
-        weight: document.querySelector(".peso").value ? parseFloat(document.querySelector(".peso").value) : null,
-        birthDate: document.getElementById("datapet").value,
-        ownerId: parseInt(document.querySelector(".idproprietario").value)
+        name: document.querySelector(".nomepet").value.trim(),
+        species: document.querySelector(".tipo").value.trim(),
+        breed: document.querySelector(".raca").value.trim(),
+        weight: document.querySelector(".peso").value ? parseFloat(document.querySelector(".peso").value) : 0,
+        birthDate: document.getElementById("datapet").value.trim(),
+        ownerId: parseInt(ownerId) // buscando owner id na local storage
     };
 
     try {
@@ -22,9 +28,10 @@ document.getElementById("formCadastroPet").addEventListener("submit", async func
         });
 
         if (response.ok) {
-            const data = await response.json();
             alert("Pet cadastrado com sucesso!");
-            console.log(data); // tratamento de erro de preguiçoso
+
+            
+            document.getElementById("formCadastroPet").reset(); // limpando os campos
         } else {
             alert("Erro ao cadastrar o pet!");
         }
