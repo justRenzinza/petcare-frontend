@@ -12,7 +12,7 @@
           
           <img src="src/icon-cadastrar-pet.png">
           <h2>Insira abaixo os dados do animal:</h2>
-          <form>
+          <form id="formCadastroPet" action="cadastroPet.js" method="POST">
                <div>
                     <input class="nomepet" type="text" name="nomepet" placeholder="Nome">
                </div>
@@ -28,7 +28,7 @@
 
                </div>
 
-               <button onclick="window.location.href= 'animal.html'" type="submit">Confirmar</button>
+               <button type="button" onclick="enviarFormulario()">Confirmar</button>
 
           </form>
      </div>
@@ -46,4 +46,10 @@
           </nav>
      </footer>
 </body>
+<script>
+     function enviarFormulario() {
+         document.getElementById("formCadastroPet").submit();
+         window.location.href = 'animal.html';
+     }
+</script>
 </html>
