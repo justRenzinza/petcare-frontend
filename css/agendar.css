@@ -1,182 +1,198 @@
-body {
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f5f5f5;
     font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
     color: #333;
+    padding-bottom: 80px;
 }
 
 .container {
-    padding: 16px;
-    max-width: 600px;
+    max-width: 400px;
     margin: 0 auto;
+    padding: 15px;
 }
 
-.service-selector, .clinic-selector, .pet-selector {
-    margin-bottom: 24px;
+.selecao-pet,
+.selecao-tipo,
+.selecao-clinica {
+    margin-bottom: 15px;
 }
 
-.service-selector label, .clinic-selector label, .pet-selector label {
+.selecao-pet label,
+.selecao-tipo label,
+.selecao-clinica label {
     display: block;
-    color: #666;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
+    color: #4a5568;
+    font-size: 14px;
 }
 
-.service-dropdown, .clinic-dropdown, .pet-dropdown {
+.lista-selecao {
     width: 100%;
-    padding: 8px;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
     background-color: #4b6455;
     color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
     appearance: none;
     background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
     background-repeat: no-repeat;
-    background-position: right 8px center;
+    background-position: right 10px center;
 }
 
-.date-selector p {
-    color: #666;
-    margin-bottom: 16px;
-}
-
-.calendar {
-    background-color: white;
+.calendario {
+    background: white;
     border-radius: 8px;
-    padding: 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
-.calendar-header {
+.cabecalho-calendario {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 16px;
+    margin-bottom: 15px;
 }
 
-.current-month {
+.botao-nav {
+    background: none;
+    border: none;
+    color: #4b6455;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.mes-atual {
     text-align: center;
 }
 
-.current-month h2 {
-    margin: 0;
-    color: #2e7d32;
-    font-size: 20px;
+.mes-atual h2 {
+    color: #4b6455;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 2px;
 }
 
-.current-month span {
+.mes-atual span {
     color: #666;
-    font-size: 14px;
+    font-size: 12px;
 }
 
-.nav-btn {
-    border: none;
-    background: none;
-    color: #666;
-    font-size: 20px;
-    cursor: pointer;
-    padding: 4px 8px;
-}
-
-.weekdays {
+.dias-semana {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     text-align: center;
-    color: #666;
-    font-size: 14px;
     margin-bottom: 8px;
 }
 
-.calendar-grid {
+.dias-semana span {
+    font-size: 11px;
+    color: #666;
+    padding: 3px;
+}
+
+.grid-calendario {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 4px;
+    gap: 5px;
 }
 
-.date-btn {
+.botao-data {
+    aspect-ratio: 1;
     border: none;
     background: none;
-    padding: 8px;
-    font-size: 14px;
+    font-size: 12px;
     cursor: pointer;
-    border-radius: 4px;
+    color: #666;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
 }
 
-.date-btn:not(.disabled):hover {
-    background-color: #e8f5e9;
+.botao-data.selecionado {
+    background-color: #4b6455;
+    color: white;
 }
 
-.date-btn.disabled {
+.botao-data.desativado {
     color: #ccc;
     cursor: default;
 }
 
-.time-slots {
-    margin-top: 24px;
+.selecao-horario h3 {
+    margin-bottom: 10px;
+    color: #4a5568;
+    font-size: 14px;
 }
 
-.time-slots h3 {
-    color: #333;
-    font-size: 16px;
-    margin-bottom: 16px;
-}
-
-.time-grid {
+.grid-horarios {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
-    margin-bottom: 24px;
+    margin-bottom: 15px;
 }
 
-.time-btn {
+.botao-horario {
     padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 16px;
-    background-color: white;
-    color: #333;
-    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    background: white;
+    font-size: 13px;
     cursor: pointer;
+    color: #666;
 }
 
-.time-btn.available {
+.botao-horario.selecionado {
     background-color: #4b6455;
     color: white;
-    border: none;
+    border-color: #4b6455;
 }
 
-.schedule-btn {
+.botao-agendar {
     width: 100%;
     padding: 12px;
-    background-color: #d7ccc8;
+    background-color: #d6cfc7;
     color: #333;
     border: none;
-    border-radius: 4px;
-    font-size: 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
     cursor: pointer;
+    margin-top: 10px;
     margin-bottom: 60px;
 }
 
-footer {
+.menu-navegacao {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #eee;
-    padding: 8px 0;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-}
-
-footer nav {
+    background: #f5f5f5;
+    border-top: 1px solid #ddd;
     display: flex;
     justify-content: space-around;
+    padding: 10px;
+    z-index: 1000;
 }
 
-.navegacao {
+.menu-navegacao a {
+    text-decoration: none;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
-.navegacao img {
-    width: 25px;
-    height: 25px;
+.menu-navegacao img {
+    width: 24px;
+    height: 24px;
 }
