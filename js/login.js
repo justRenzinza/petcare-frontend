@@ -1,4 +1,4 @@
-const urlBackend = 'http://localhost:3001';
+const urlBackend = 'http://54.174.116.135:3001';
 
 document.getElementById('formLogin').addEventListener('submit', async (event) => {
 console.log('chegamos aqui');

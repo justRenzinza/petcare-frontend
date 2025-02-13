@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const listaAnimais = document.querySelector(".animal-list");
-    
-    const urlBackend = 'http://localhost:3001';
+
+    const urlBackend = 'http://54.174.116.135:3001';
     const ownerId = localStorage.getItem("id"); // Pegando o ID do usuário logado
 
     if (!ownerId) {
@@ -15,17 +15,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
         const response = await fetch(`${urlBackend}/pets/owner/${ownerId}`);
         if (!response.ok) throw new Error(`Erro ao buscar os pets: ${response.statusText}`);
-        
+
         const pets = await response.json();
-        
+
         if (pets.length === 0) {
             listaAnimais.innerHTML += "<p>Você ainda não cadastrou nenhum animal.</p>";
             return;
         }
-        
+
         pets.forEach(pet => {
             const birthDate = new Date(pet.birthDate).toLocaleDateString("pt-BR");
-            
+
             const card = document.createElement("div");
             card.className = "animal-card";
             card.innerHTML = `

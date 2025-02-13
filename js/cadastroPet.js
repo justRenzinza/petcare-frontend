@@ -1,4 +1,4 @@
-const urlBackend = 'http://localhost:3001';
+const urlBackend = 'http://54.174.116.135:3001';
 
 document.getElementById("formCadastroPet").addEventListener("submit", async function(event) {
     event.preventDefault();
@@ -28,8 +28,9 @@ document.getElementById("formCadastroPet").addEventListener("submit", async func
 
         if (response.ok) {
             alert("Pet cadastrado com sucesso!");
+            window.location.href = '/animal.html'; // Redirecionando para a página inicial
 
-            
+
             document.getElementById("formCadastroPet").reset(); // limpando os campos
         } else {
             alert("Erro ao cadastrar o pet!");

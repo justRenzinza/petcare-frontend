@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const listaAgendamentos = document.getElementById("lista-agendamentos");
-    const urlBackend = 'http://localhost:3001'; 
+    const urlBackend = 'http://54.174.116.135:3001';
 
-    
+
     const ownerId = localStorage.getItem("id"); // Pegando o ID do usuário logado
 
     if (!ownerId) {
@@ -68,29 +68,29 @@ document.addEventListener("DOMContentLoaded", async () => {
             // Criando o card de agendamento
             const card = document.createElement("div");
             card.className = "card-agendamento";
-            
+
             const infoPet = document.createElement("div");
             infoPet.className = "info-pet";
-            
+
             const dadosPet = document.createElement("div");
             dadosPet.className = "dados-pet";
-            
+
             const nomePet = document.createElement("p");
             nomePet.className = "nome-pet";
             nomePet.textContent = pet.name;
-            
+
             const tipoPet = document.createElement("p");
             tipoPet.className = "tipo-pet";
             tipoPet.textContent = pet.species;
 
             dadosPet.appendChild(nomePet);
             dadosPet.appendChild(tipoPet);
-            
+
             infoPet.appendChild(dadosPet);
-            
+
             const infoConsulta = document.createElement("div");
             infoConsulta.className = "info-consulta";
-            
+
             // Formatar data e hora para exibição
             const dataAgendamento = new Date(agendamento.date);
             const dataFormatada = dataAgendamento.toLocaleDateString('pt-BR');
@@ -98,25 +98,25 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             const data = document.createElement("p");
             data.innerHTML = `<span>DATA</span> - ${dataFormatada}`;
-            
+
             const horario = document.createElement("p");
             horario.innerHTML = `<span>HORÁRIO</span> - ${horarioFormatado}`;
-            
+
             const local = document.createElement("p");
             local.innerHTML = `<span>LOCAL</span> - ${clinicName}`;
 
             infoConsulta.appendChild(data);
             infoConsulta.appendChild(horario);
             infoConsulta.appendChild(local);
-            
+
             const status = document.createElement("span");
             status.className = `status ${agendamento.status.toLowerCase()}`;
             status.textContent = agendamento.status;
-            
+
             card.appendChild(infoPet);
             card.appendChild(infoConsulta);
             card.appendChild(status);
-            
+
             // Adicionando o card ao elemento de lista de agendamentos, logo após o botão
             listaAgendamentos.appendChild(card);
         }

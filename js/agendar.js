@@ -2,8 +2,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     const selectPet = document.getElementById("selectPet");
     const selectClinica = document.getElementById("selectClinica");
     const botaoAgendar = document.querySelector(".botao-agendar");
-    const urlBackend = 'http://localhost:3001';
+    const urlBackend = 'http://54.174.116.135:3001';
     const ownerId = localStorage.getItem("id"); // Pegando o ID do usuário logado
+
+    // Extrair o clinicId da URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedClinicId = urlParams.get('clinicId'); // Supondo que o parâmetro seja 'clinicId'
 
     if (!ownerId) {
         console.error("Usuário não identificado!");
@@ -14,9 +18,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Requisição para buscar os pets do dono
         const response = await fetch(`${urlBackend}/pets/owner/${ownerId}`);
         if (!response.ok) throw new Error(`Erro ao buscar os pets: ${response.statusText}`);
-        
+
         const pets = await response.json();
-        
+
         if (pets.length === 0) {
             alert("Você não tem nenhum pet cadastrado.");
             return;
@@ -39,17 +43,26 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (!response.ok) throw new Error(`Erro ao buscar as clínicas: ${response.statusText}`);
 
         const clinicas = await response.json();
-        
+
         if (!Array.isArray(clinicas.items)) {
             console.error("Formato de resposta inesperado para clínicas:", clinicas);
             return;
         }
 
-        // Preencher o select de clínicas
+        // Preencher o select de clínicas e marcar a clínica selecionada
         clinicas.items.forEach(clinica => {
             const option = document.createElement("option");
             option.value = clinica.id;
             option.textContent = clinica.name;
+
+            // Verificar se o ID da clínica na URL é igual ao ID da clínica no loop
+            const selected = selectedClinicId === clinica.id.toString(); // Comparação como string
+
+            // Marcar a clínica como selecionada, se for a que foi extraída da URL
+            if (selected) {
+                option.selected = true;
+            }
+
             selectClinica.appendChild(option);
         });
     } catch (error) {
@@ -108,6 +121,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         .then(response => response.json())
         .then(data => {
             alert(`Consulta agendada para o pet: ${petSelecionado}`);
+            window.location.href = '/agendamentos.html'; // Redirecionando para a página inicial
         })
         .catch(error => {
             console.error('Erro ao agendar:', error);
