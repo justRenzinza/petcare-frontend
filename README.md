@@ -2,15 +2,6 @@
 # 🐾 Univet Frontend
 
 Frontend do sistema web para agendamento de consultas para pets, conectando donos de pets e clínicas veterinárias parceiras de forma prática e eficiente.
-
-## 📑 Índice
-- [Sobre o Projeto](#sobre-o-projeto)
-- [Funcionalidades](#funcionalidades)
-- [Estrutura do Projeto](#estrutura-do-projeto)
-- [Tecnologias Utilizadas](#tecnologias-utilizadas)
-- [Como Executar o Projeto](#como-executar-o-projeto)
-- [Contato](#contato)
-
 ---
 
 ## 📖 Sobre o Projeto
