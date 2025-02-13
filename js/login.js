@@ -1,6 +1,7 @@
-const urlBackend = 'URL_DO_BACKEND'; 
+const urlBackend = 'http://localhost:3001';
 
 document.getElementById('formLogin').addEventListener('submit', async (event) => {
+console.log('chegamos aqui');
     event.preventDefault();
 
     const email = document.getElementById('inputEmail').value;
@@ -21,6 +22,7 @@ document.getElementById('formLogin').addEventListener('submit', async (event) =>
 
         const data = await response.json();
         localStorage.setItem('token', data.token); // a local storage ta armazenando o token JWT gerado
+        localStorage.setItem('id',data.id);
         alert('Login bem-sucedido!');
         window.location.href = 'index.html'; // volta pra pagina inicial depois de efetuar o login
     } catch (error) {

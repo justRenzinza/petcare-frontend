@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cadastrar Pet</title>
 <link rel="stylesheet" href="css/cadastropet.css">
+
 </head>
 <body>
      
@@ -12,7 +13,7 @@
           
           <img src="src/icon-cadastrar-pet.png">
           <h2>Insira abaixo os dados do animal:</h2>
-          <form id="formCadastroPet" action="cadastroPet.js" method="POST">
+          <form id="formCadastroPet">
                <div>
                     <input class="nomepet" type="text" name="nomepet" placeholder="Nome">
                </div>
@@ -28,7 +29,7 @@
 
                </div>
 
-               <button type="button" onclick="enviarFormulario()">Confirmar</button>
+               <button type="submit">Confirmar</button>
 
           </form>
      </div>
@@ -45,11 +46,13 @@
           </div>
           </nav>
      </footer>
+     <script src="js/cadastroPet.js"></script>
 </body>
+
 <script>
      function enviarFormulario() {
-         document.getElementById("formCadastroPet").submit();
-         window.location.href = 'animal.html';
+          document.getElementById("formCadastroPet").submit();
      }
 </script>
+
 </html>

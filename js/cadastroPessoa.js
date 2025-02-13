@@ -1,7 +1,8 @@
-const urlBackend = 'URL_DO_BACKEND'; //lembrar de trocar depois pela real
+const urlBackend = 'http://localhost:3001';
+
 async function criarUsuario(name, email, password) {
     try {
-        const response = await fetch(`${urlBackend}URL_DO_BACKEND/users`, { 
+        const response = await fetch(`${urlBackend}/users`, { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
