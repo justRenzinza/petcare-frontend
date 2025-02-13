@@ -6,18 +6,18 @@
     <title>Agendar Consulta</title>
     <link rel="stylesheet" href="css/agendar.css">
 </head>
-<body onload="checkURL()">
+<body>
     <div class="container">
-        <section class="pet-selector">
+        <section class="selecao-pet">
             <label>Selecione o pet:</label>
-            <select class="pet-dropdown" id="petSelect">
+            <select class="lista-selecao" id="selectPet">
                 <option value="">Selecione um pet</option>
             </select>
         </section>
 
-        <section class="service-selector">
+        <section class="selecao-tipo">
             <label>Selecione o tipo:</label>
-            <select class="service-dropdown">
+            <select class="lista-selecao">
                 <option selected>Consulta</option>
                 <option>Vacina</option>
                 <option>Banho</option>
@@ -25,9 +25,9 @@
             </select>
         </section>
 
-        <section class="clinic-selector">
+        <section class="selecao-clinica">
             <label>Selecione a clínica:</label>
-            <select class="clinic-dropdown" id="clinicSelect">
+            <select class="lista-selecao" id="selectClinica">
                 <option value="DIAMANTE">DIAMANTE</option>
                 <option value="PETCURE">PETCURE</option>
                 <option value="CATCARE">CATCARE</option>
@@ -35,18 +35,19 @@
             </select>
         </section>
 
-        <section class="date-selector">
-            <p>Escolha a melhor data para a sua consulta</p>
-            <div class="calendar">
-                <div class="calendar-header">
-                    <button class="nav-btn prev-month">&lt;</button>
-                    <div class="current-month">
+        <section class="selecao-data">
+            <p>Selecione a data:</p>
+            <br>
+            <div class="calendario">
+                <div class="cabecalho-calendario">
+                    <button class="botao-nav anterior">&lt;</button>
+                    <div class="mes-atual">
                         <h2>Dezembro</h2>
                         <span>2024</span>
                     </div>
-                    <button class="nav-btn next-month">&gt;</button>
+                    <button class="botao-nav proximo">&gt;</button>
                 </div>
-                <div class="weekdays">
+                <div class="dias-semana">
                     <span>Dom</span>
                     <span>Seg</span>
                     <span>Ter</span>
@@ -55,160 +56,152 @@
                     <span>Sex</span>
                     <span>Sab</span>
                 </div>
-                <div class="calendar-grid" id="calendar-days"></div>
+                <div class="grid-calendario" id="diasCalendario"></div>
             </div>
         </section>
 
-        <section class="time-slots">
+        <section class="selecao-horario">
             <h3>Horários disponíveis</h3>
-            <div class="time-grid">
-                <button class="time-btn">9:00</button>
-                <button class="time-btn">14:00</button>
-                <button class="time-btn">16:00</button>
+            <div class="grid-horarios">
+                <button class="botao-horario">8:00</button>
+                <button class="botao-horario">9:00</button>
+                <button class="botao-horario">11:00</button>
                 
-            </div>
         </section>
 
-        <button class="schedule-btn">Marcar consulta</button>
+        <button class="botao-agendar">Marcar consulta</button>
 
-        <footer>
-            <nav>
-                <div class="navegacao">
-                    <a href="index.html"><img src="src/home.png" alt=""></a>
-                </div>
-                <div class="navegacao">
-                    <a href="animal.html"><img src="src/dog.png" alt="Pet"></a>
-                </div>
-                <div class="navegacao">
-                    <a href="agendamentos.html"><img src="src/calendar.png" alt="Agenda"></a>
-                </div>
-            </nav>
-        </footer>
+        <nav class="menu-navegacao">
+            <a href="index.html">
+                <img src="src/home.png" alt="Início">
+                
+            </a>
+            <a href="animal.html">
+                <img src="src/dog.png" alt="Pets">
+                
+            </a>
+            <a href="agendamentos.html">
+                <img src="src/calendar.png" alt="Agenda">
+                
+            </a>
+        </nav>
     </div>
-
+    
     <script>
-        let selectedDate = null;
-        let selectedTime = null;
-        const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-        let currentMonth = 11;
-        let currentYear = 2024;
+        
+        const dadosAgendamento = {
+            dataSelecionada: null,
+            horarioSelecionado: null,
+            mesAtual: 11,
+            anoAtual: 2024,
+            meses: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 
+                    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+        };
 
-        async function loadPets() {
-            try {
-                const pets = JSON.parse(localStorage.getItem('pets')) || [];
-                const petSelect = document.getElementById('petSelect');
-                while (petSelect.options.length > 1) {
-                    petSelect.remove(1);
-                }
-                pets.forEach(pet => {
-                    const option = document.createElement('option');
-                    option.value = pet.id;
-                    option.textContent = pet.name;
-                    petSelect.appendChild(option);
-                });
-            } catch (error) {
-                console.error('Error loading pets:', error);
-            }
-        }
-
-        function checkURL() {
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-            const clinica = urlParams.get('clinica')
-            if(clinica) {
-                document.getElementById('clinicSelect').value = clinica;
-            }
-            loadPets();
-        }
-
-        function updateMonthDisplay() {
-            const monthTitle = document.querySelector('.current-month h2');
-            const yearSpan = document.querySelector('.current-month span');
-            monthTitle.textContent = months[currentMonth];
-            yearSpan.textContent = currentYear;
-        }
-
-        function generateCalendar(year, month) {
-            const firstDay = new Date(year, month, 1);
-            const lastDay = new Date(year, month + 1, 0);
-            const startDay = firstDay.getDay();
-            const totalDays = lastDay.getDate();
-            const calendarGrid = document.getElementById('calendar-days');
-            calendarGrid.innerHTML = '';
+        function carregarPets() {
+            const listaPets = JSON.parse(localStorage.getItem('pets')) || [];
+            const selectPet = document.getElementById('selectPet');
             
-            for (let i = 0; i < startDay; i++) {
-                const emptyCell = document.createElement('button');
-                emptyCell.className = 'date-btn disabled';
-                calendarGrid.appendChild(emptyCell);
-            }
-            
-            for (let day = 1; day <= totalDays; day++) {
-                const dateCell = document.createElement('button');
-                dateCell.className = 'date-btn';
-                dateCell.textContent = day;
-                
-                if (selectedDate === day) {
-                    dateCell.classList.add('available');
-                }
-                
-                dateCell.addEventListener('click', function() {
-                    document.querySelectorAll('.date-btn').forEach(btn => btn.classList.remove('available'));
-                    this.classList.add('available');
-                    selectedDate = day;
-                });
-                
-                calendarGrid.appendChild(dateCell);
-            }
-        }
-
-        document.querySelector('.prev-month').addEventListener('click', function() {
-            if (currentMonth === 0) {
-                currentMonth = 11;
-                currentYear--;
-            } else {
-                currentMonth--;
-            }
-            updateMonthDisplay();
-            generateCalendar(currentYear, currentMonth);
-        });
-
-        document.querySelector('.next-month').addEventListener('click', function() {
-            if (currentMonth === 11) {
-                currentMonth = 0;
-                currentYear++;
-            } else {
-                currentMonth++;
-            }
-            updateMonthDisplay();
-            generateCalendar(currentYear, currentMonth);
-        });
-
-        document.querySelectorAll('.time-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.time-btn').forEach(btn => btn.classList.remove('available'));
-                this.classList.add('available');
-                selectedTime = this.textContent;
+            selectPet.innerHTML = '<option value="">Selecione um pet</option>';
+            listaPets.forEach(pet => {
+                selectPet.innerHTML += `<option value="${pet.id}">${pet.name}</option>`;
             });
-        });
+        }
 
-        document.querySelector('.schedule-btn').addEventListener('click', function() {
-            const selectedPet = document.getElementById('petSelect').value;
-            if (!selectedPet) {
+        function prepararCalendario() {
+            atualizarMesAno();
+            criarDiasCalendario();
+        }
+
+        function atualizarMesAno() {
+            document.querySelector('.mes-atual h2').textContent = dadosAgendamento.meses[dadosAgendamento.mesAtual];
+            document.querySelector('.mes-atual span').textContent = dadosAgendamento.anoAtual;
+        }
+
+        function criarDiasCalendario() {
+            const primeiroDia = new Date(dadosAgendamento.anoAtual, dadosAgendamento.mesAtual, 1);
+            const ultimoDia = new Date(dadosAgendamento.anoAtual, dadosAgendamento.mesAtual + 1, 0);
+            const gridCalendario = document.getElementById('diasCalendario');
+            
+            gridCalendario.innerHTML = '';
+            
+            for (let i = 0; i < primeiroDia.getDay(); i++) {
+                gridCalendario.innerHTML += '<button class="botao-data desativado"></button>';
+            }
+            
+            for (let dia = 1; dia <= ultimoDia.getDate(); dia++) {
+                gridCalendario.innerHTML += `<button class="botao-data">${dia}</button>`;
+            }
+        }
+
+        function configurarBotoes() {
+            document.querySelector('.anterior').onclick = () => mudarMes(-1);
+            document.querySelector('.proximo').onclick = () => mudarMes(1);
+            
+            document.getElementById('diasCalendario').onclick = (evento) => {
+                if (evento.target.classList.contains('botao-data') && !evento.target.classList.contains('desativado')) {
+                    document.querySelectorAll('.botao-data').forEach(botao => botao.classList.remove('selecionado'));
+                    evento.target.classList.add('selecionado');
+                    dadosAgendamento.dataSelecionada = evento.target.textContent;
+                }
+            };
+
+            document.querySelectorAll('.botao-horario').forEach(botao => {
+                botao.onclick = (evento) => {
+                    document.querySelectorAll('.botao-horario').forEach(b => b.classList.remove('selecionado'));
+                    evento.target.classList.add('selecionado');
+                    dadosAgendamento.horarioSelecionado = evento.target.textContent;
+                };
+            });
+
+            document.querySelector('.botao-agendar').onclick = fazerAgendamento;
+        }
+
+        function mudarMes(direcao) {
+            dadosAgendamento.mesAtual += direcao;
+            
+            if (dadosAgendamento.mesAtual > 11) {
+                dadosAgendamento.mesAtual = 0;
+                dadosAgendamento.anoAtual++;
+            } else if (dadosAgendamento.mesAtual < 0) {
+                dadosAgendamento.mesAtual = 11;
+                dadosAgendamento.anoAtual--;
+            }
+            
+            prepararCalendario();
+        }
+
+        function fazerAgendamento() {
+            const petSelecionado = document.getElementById('selectPet');
+            const clinicaSelecionada = document.getElementById('selectClinica');
+            
+            if (!petSelecionado.value) {
                 alert('Por favor selecione um pet');
                 return;
             }
             
-            if (selectedDate && selectedTime) {
-                const selectedClinic = document.querySelector('.clinic-dropdown').value;
-                const selectedPetName = document.getElementById('petSelect').options[document.getElementById('petSelect').selectedIndex].text;
-                alert(`Consulta agendada para ${selectedPetName} na ${selectedClinic} para ${selectedDate}/${currentMonth + 1}/${currentYear} às ${selectedTime}`);
-            } else {
+            if (!dadosAgendamento.dataSelecionada || !dadosAgendamento.horarioSelecionado) {
                 alert('Por favor selecione uma data e horário');
+                return;
             }
-        });
+            
+            alert(`Consulta agendada para ${petSelecionado.options[petSelecionado.selectedIndex].text} 
+                   na ${clinicaSelecionada.value} para 
+                   ${dadosAgendamento.dataSelecionada}/${dadosAgendamento.mesAtual + 1}/${dadosAgendamento.anoAtual} 
+                   às ${dadosAgendamento.horarioSelecionado}`);
+        }
 
-        updateMonthDisplay();
-        generateCalendar(currentYear, currentMonth);
+        window.onload = function() {
+            carregarPets();
+            prepararCalendario();
+            configurarBotoes();
+            
+            const params = new URLSearchParams(window.location.search);
+            const clinica = params.get('clinica');
+            if(clinica) {
+                document.getElementById('selectClinica').value = clinica;
+            }
+        };
     </script>
 </body>
 </html>
